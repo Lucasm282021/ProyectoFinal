@@ -119,6 +119,13 @@ Algoritmo SisVentaPasajes
 			Hasta Que pasaje = 0
 		FinSi
 		Si Op=2 Entonces //MENU ADMINISTRADOR
+			si passADM = "ADMINISTRADOR" Entonces
+				Escribir " +-------------------------------------------------+"
+				Escribir " |                !!!ADVERTENCIA!!!                |"
+				Escribir " | La contrasema esta por defecto en ADMINISTRADOR |"
+				Escribir " | se recomienda cambiarla por una de su elección  |"
+				Escribir " +-------------------------------------------------+"
+			FinSi
 			Escribir "Ingrese la contraseña."
 			leer Pass
 			Si Pass = PassADM Entonces
@@ -211,11 +218,12 @@ Algoritmo SisVentaPasajes
 							Escribir " La contraseña es correcta."
 							Escribir " Ingrese la nueva contraseña."
 							leer PassADM
-							Escribir "Contraseña cambiada exitisamente
+							Escribir "Contraseña cambiada exitosamente" 
 							Escribir "Precione una tecla para volver al Menu."
 							Esperar Tecla
 						SiNo// En caso de que no coincida la contraseña 
-							Escribir " CONTRASEÑA INCORRECTA"
+						Escribir " La contraseña ingresada es incorrecta"
+						Esperar 3 Segundos
 						FinSi
 					FinSi
 					Si Op >= 4 Entonces// En caso de presionar una opción no valida
