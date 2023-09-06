@@ -1,4 +1,5 @@
 Algoritmo SisVentaPasajes
+	//Variables que simulan la adquisición y guardado de los datos en una BD
 	Definir Servicio Como Numerica
 	BoleTurista  = 400
 	BolePlus     = 800
@@ -65,6 +66,7 @@ Algoritmo SisVentaPasajes
 							Leer Servicio
 						FinSI
 						Limpiar Pantalla
+						// estructura que muestra el comprobante de la compra del pasaje
 						Escribir "+------------------------------------+"
 						Escribir " Usted a comprado un pasaje Plus"
 						Escribir "+------------------------------------+"
@@ -102,24 +104,25 @@ Algoritmo SisVentaPasajes
 						FinSi
 						Escribir "+------------------------------------+"
 						Escribir " Precione una tecla para continuar"
+						// fin de la estructura que muestra el comprobante de la compra del pasaje
 						Esperar Tecla
 					FinSi
-					Si Pasaje >= 2 Entonces
+					Si Pasaje >= 2 Entonces// En caso de presionar una opción no valida
 						Escribir "ERROR!! OPCION NO VALIDA"
 						Esperar Tecla
 					FinSi
-				SiNo
+				SiNo// Mensaje que se muestra al agotarse los lugares disponibles
 					Escribir " Lo lamento no quedan mas pasjes disponibles"
 					Pasaje = 0
 					Esperar 2 Segundos
 				FinSi
 			Hasta Que pasaje = 0
 		FinSi
-		Si Op=2 Entonces //SUB MENU ADMINISTRADOR
+		Si Op=2 Entonces //MENU ADMINISTRADOR
 			Escribir "Ingrese la contraseña."
 			leer Pass
 			Si Pass = PassADM Entonces
-				Repetir// menu de administrador
+				Repetir// SUB MENU ADMINISTRADOR
 					Limpiar Pantalla
 					Escribir "_____________________________________"
 					Escribir "          ADMINISTRADOR"
@@ -131,7 +134,7 @@ Algoritmo SisVentaPasajes
 					Escribir "_____________________________________"
 					Escribir "-Elija la opcion correspondiente"
 					leer Op
-					Si Op = 1 Entonces 
+					Si Op = 1 Entonces //Visualización y modificación de los costos de cada servicio 
 						Limpiar Pantalla
 						Escribir "_____________________________________"
 						Escribir "     MODIFICAR COSTO DE PASAJES"
@@ -147,7 +150,7 @@ Algoritmo SisVentaPasajes
 						Escribir " ¿Desea cambiar estos valores?"
 						Escribir " Presiones 1 para SI o ENTER para NO"
 						leer Op2
-						Si Op2=1 Entonces
+						Si Op2=1 Entonces//modificación de los costos de cada servicio
 							Limpiar Pantalla
 							Escribir "_____________________________________"
 							Escribir "     MODIFICAR COSTO DE PASAJES"
@@ -171,7 +174,7 @@ Algoritmo SisVentaPasajes
 							Esperar Tecla
 						FinSi
 					FinSi
-					Si Op = 2 Entonces
+					Si Op = 2 Entonces// lista información detallada de pasajes vendidos y pasajeros
 						Limpiar Pantalla
 						Escribir "____________________________________"
 						Escribir "      LISTAR PASAJES VENDIDOS"
@@ -194,39 +197,40 @@ Algoritmo SisVentaPasajes
 						Escribir "____________________________________"
 						Escribir " La recaudacion es de:    $",Ganancias
 						Escribir "____________________________________"
-						// falta poner recaudacion si el micro va lleno y si son menores de 3 años no paga y no ocupa lugar
 						Escribir " Precione una Tecla para continuar"
 						Esperar Tecla
 					Finsi
-					Si Op = 3 Entonces
+					Si Op = 3 Entonces// Permite gestionar la contraseña de ADMINISTRADOR 
 						Limpiar Pantalla
 						Escribir "_____________________________________"
 						Escribir "     CAMBIAR CONTRASEÑA"
 						Escribir "_____________________________________"
 						Escribir " Ingrese la contraseña ACTUAL"
 						Leer Pass 
-						SI Pass = PassADM Entonces
-							Escribir " Ingrese la nueva contraseña"
+						SI Pass = PassADM Entonces // compara contraseña para sustituir con la nueva 
+							Escribir " La contraseña es correcta."
+							Escribir " Ingrese la nueva contraseña."
 							leer PassADM
-							Escribir "Contraseña cambiada exitisamente, Precione una tecla."
+							Escribir "Contraseña cambiada exitisamente
+							Escribir "Precione una tecla para volver al Menu."
 							Esperar Tecla
-						SiNo
+						SiNo// En caso de que no coincida la contraseña 
 							Escribir " CONTRASEÑA INCORRECTA"
 						FinSi
 					FinSi
-					Si Op >= 4 Entonces
+					Si Op >= 4 Entonces// En caso de presionar una opción no valida
 						Escribir "ERROR!! OPCION NO VALIDA"
 						Esperar Tecla
 					FinSi
 				Hasta Que Op = 0 
 				Op = 1
 			SiNo
-				Escribir "La contraseña ingresada es incorrecta"
+				Escribir "La contraseña ingresada es incorrecta"// En caso de que no coincida la contraseña de ingreso
 				Escribir "Presione una tecla "
 				Esperar Tecla
 			FinSi
 		FinSi
-		Si Op >= 3 Entonces
+		Si Op >= 3 Entonces// En caso de presionar una opción no valida
 			Escribir "ERROR!! OPCION NO VALIDA"
 			Esperar Tecla
 		FinSi
