@@ -6,6 +6,7 @@ Algoritmo SisVentaPasajes
 	BoleFull     = 1200
 	Mayores      = 0
 	Menores      = 0
+	MenoresDeTres= 0
 	TotalVendios = 0
 	TotalTurista = 0
 	TotalPlus    = 0
@@ -16,46 +17,53 @@ Algoritmo SisVentaPasajes
 	
 	Repetir//MENU principal del programa
 		Limpiar Pantalla
-		Escribir"_____________________________________"
-		Escribir"Systema de Venta y Gestion de pasajes"
-		Escribir"_____________________________________"
-		Escribir "          MENU PRINCIPAL"
-		Escribir "_____________________________________"
-		Escribir "   | 1 |     VENTAS"
-		Escribir "   | 2 |     ADMINISTRADOR"
-		Escribir "   | 0 |     SALIR"
-		Escribir "_____________________________________"
+		Escribir "+--------------------------------------+"
+		Escribir "|Systema de Venta y Gestion de pasajes |"
+		Escribir "+--------------------------------------+"
+		Escribir "|          MENU PRINCIPAL              |"
+		Escribir "+--------------------------------------+"
+		Escribir "|  | 1 |     VENTAS - PASAJES          |"
+		Escribir "|  | 2 |     ADMINISTRADOR             |"
+		Escribir "|  | 0 |     SALIR                     |"
+		Escribir "+--------------------------------------+"
 		Escribir "-Elija la opcion correspondiente"
 		leer Op
 		Si Op=1 Entonces //SUB MENU VENTAS
 			Repetir
 				Si lugares >= 1 Entonces
 					Limpiar Pantalla
-					Escribir "_____________________________________"
-					Escribir "              VENTAS"
-					Escribir "_____________________________________"
-					Escribir " Hay un total de ",Lugares," lugares"
-					Escribir "_____________________________________"
-					Escribir " ¿Desea comprar un pasaje?"
-					Escribir " Precione 1 para SI o 0 para NO"
+					Escribir "+--------------------------------------+"
+					Escribir "|         VENTAS - PASAJES             |"
+					Escribir "+--------------------------------------+"
+					Escribir "      Hay un total de ",Lugares," lugares"
+					Escribir "+--------------------------------------+"
+					Escribir "| ¿Desea comprar un pasaje?            |"
+					Escribir "| Precione 1 para SI o 0 para NO       |"
+					Escribir "+--------------------------------------+"
 					leer Pasaje
 					Si pasaje = 1 Entonces
 						Escribir "Ingrese su Nombre"
 						leer Nombre 
+						Nombre = Mayusculas(Nombre)
 						Escribir "Ingrese su Apellido"
 						leer Apellido 
-						Escribir "Ingrese su edad"
-						leer Edad
-						si Edad <= 3 Entonces
+						Apellido = Mayusculas(Apellido)
+						Repetir // valida la entrada de edad en un rango de 0 a 110 años como maximo
+							si Edad < 0 o Edad > 110 Entonces
+								Escribir "Edad Fuera de rango"
+							FinSi
+							Escribir "Ingrese su edad"
+							leer Edad
+						Hasta Que Edad >=0 y Edad <= 110
+						si Edad <= 3 Entonces// muestra mensaje si el pasajero es menor a 3 años
 							Escribir "______________________________________"
 							Escribir "EL PASAJERO NO PAGA ES MENOR DE 3 AÑOS"
 							Escribir "           NO OCUPA LUGAR             "
 							Escribir "______________________________________"
 							Escribir " preciones una tecla para continuar   "
-							//Lugares=Lugares+1
 							Servicio=0
 							Esperar Tecla
-						SiNo
+						SiNo// muestra los distintos tipos de servicios
 							Escribir "_____________________________________"
 							Escribir "    Seleccione tipo de Servicio"
 							Escribir "_____________________________________"
@@ -67,22 +75,42 @@ Algoritmo SisVentaPasajes
 						FinSI
 						Limpiar Pantalla
 						// estructura que muestra el comprobante de la compra del pasaje
-						Escribir "+------------------------------------+"
-						Escribir " Usted a comprado un pasaje Plus"
-						Escribir "+------------------------------------+"
-						Escribir "| Pasaje a nombre de: ",Nombre," ",Apellido
-						Escribir "| Edad del pasajero:  ", Edad 
+						Escribir "+-------------------------------------+"
+						Escribir "|     Usted a comprado un pasaje      |"
+						Escribir "+-------------------------------------+"
+						Escribir "|         Datos del Pasajero          |"
+						Escribir "+-------------------------------------+"
+						Escribir "| Nombre  : ",Nombre
+						Escribir "| Apellido: ",Apellido
+						Escribir "| Edad    : ", Edad," años" 
+						// estructura que muestra tipo de servicios
+						Si Servicio = 1 Entonces
+							Escribir "| El servicio elejido: Turista  " 
+						FinSi
+						Si Servicio = 2 Entonces
+							Escribir "| El servicio elejido: Plus"
+						FinSi
+						Si Servicio = 3 Entonces
+							Escribir "| El servicio elejido: Full"
+						FinSi
+						// fin de la estructura tipos de servicios
 						si Edad <=17 Entonces
-							Escribir "| Es menor de edad"
+							Escribir "+-------------------------------------+"
+							Escribir "| Es MENOR de edad                    |"
+							Escribir "+-------------------------------------+"
 							Menores=Menores+1
 						SiNo
-							Escribir "| Es mayor de edad"
-							Mayores=mayores+1
+							Escribir "+-------------------------------------+"
+							Escribir "| Es MAYOR de edad                    |"
+							Escribir "+-------------------------------------+"
+							Mayores=Mayores+1
+						FinSi
+						Si Edad <= 3 Entonces
+							Menores=Menores-1
+							MenoresDeTres=MenoresDeTres+1
 						FinSi
 						Si Servicio = 0 Entonces
 							Escribir "| Costo del pasaje	  $ 0"
-							//TotalTurista=TotalTurista+1
-							//Lugares=Lugares + 1
 						FinSi
 						Si Servicio = 1 Entonces
 							Escribir "| Costo del pasaje	  $ ", BoleTurista 
@@ -102,7 +130,7 @@ Algoritmo SisVentaPasajes
 							Lugares=Lugares-1
 							Ganancias = Ganancias + BoleFull
 						FinSi
-						Escribir "+------------------------------------+"
+						Escribir "+-------------------------------------+"
 						Escribir " Precione una tecla para continuar"
 						// fin de la estructura que muestra el comprobante de la compra del pasaje
 						Esperar Tecla
@@ -198,7 +226,13 @@ Algoritmo SisVentaPasajes
 						Escribir "____________________________________"
 						Escribir " Ocupados X mayores        ",Mayores
 						Escribir "____________________________________"
-						Escribir " Lugares libres            ",Lugares
+						Escribir " Menores de 3 años:        ",MenoresDeTres
+						Escribir "____________________________________"
+						Si Lugares >=1 Entonces
+							Escribir " Lugares libres            ",Lugares
+						SiNo
+							Escribir " Lugares libres    NO QUEDAN LUGARES"
+						FinSi
 						Escribir "____________________________________"
 						Escribir " Se vendieron un Total de: ",TotalTurista+TotalPlus+TotalFull
 						Escribir "____________________________________"
