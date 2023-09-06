@@ -3,9 +3,16 @@ Algoritmo SisVentaPasajes
 	BoleTurista  = 400
 	BolePlus     = 800
 	BoleFull     = 1200
-	Lugares      = 30
 	Mayores      = 0
 	Menores      = 0
+	TotalVendios = 0
+	TotalTurista = 0
+	TotalPlus    = 0
+	TotalFull    = 0
+	Ganancias    = 0
+	Lugares      = 30
+	PassADM      = "ADMINISTRADOR" 
+	
 	Repetir//MENU principal del programa
 		Limpiar Pantalla
 		Escribir"_____________________________________"
@@ -94,7 +101,6 @@ Algoritmo SisVentaPasajes
 							Ganancias = Ganancias + BoleFull
 						FinSi
 						Escribir "+------------------------------------+"
-						
 						Escribir " Precione una tecla para continuar"
 						Esperar Tecla
 					FinSi
@@ -108,6 +114,121 @@ Algoritmo SisVentaPasajes
 					Esperar 2 Segundos
 				FinSi
 			Hasta Que pasaje = 0
+		FinSi
+		Si Op=2 Entonces //SUB MENU ADMINISTRADOR
+			Escribir "Ingrese la contraseña."
+			leer Pass
+			Si Pass = PassADM Entonces
+				Repetir// menu de administrador
+					Limpiar Pantalla
+					Escribir "_____________________________________"
+					Escribir "          ADMINISTRADOR"
+					Escribir "_____________________________________"
+					Escribir "   | 1 |   MODIFICAR COSTO DE PASAJES"
+					Escribir "   | 2 |   LISTAR PASAJES VENDIDOS"
+					Escribir "   | 3 |   CAMBIAR CONTRASEÑA"
+					Escribir "   | 0 |   REGRESAR AL MENU"
+					Escribir "_____________________________________"
+					Escribir "-Elija la opcion correspondiente"
+					leer Op
+					Si Op = 1 Entonces 
+						Limpiar Pantalla
+						Escribir "_____________________________________"
+						Escribir "     MODIFICAR COSTO DE PASAJES"
+						Escribir "_____________________________________"
+						Escribir "| Los valores actuales son          |"
+						Escribir "+-----------------------------------+"
+						Escribir "| CATEGORIA  |     VALOR            |"
+						Escribir "+-----------------------------------+"
+						Escribir "| Turista    |  $",boleTurista
+						Escribir "| Plus       |  $",bolePlus
+						Escribir "| Full       |  $",boleFull
+						Escribir "+-----------------------------------+"
+						Escribir " ¿Desea cambiar estos valores?"
+						Escribir " Presiones 1 para SI o ENTER para NO"
+						leer Op2
+						Si Op2=1 Entonces
+							Limpiar Pantalla
+							Escribir "_____________________________________"
+							Escribir "     MODIFICAR COSTO DE PASAJES"
+							Escribir "_____________________________________"
+							Escribir " Indique el nuevo valor para la clase Turista"
+							leer BoleTurista
+							Escribir " Indique el nuevo valor para la clase Plus"
+							leer BolePlus
+							Escribir " Indique el nuevo valor para la clase Full"
+							leer BoleFull
+							Escribir "_____________________________________"
+							Escribir "| Los nuevos valores actuales son   |"
+							Escribir "+-----------------------------------+"
+							Escribir "| CATEGORIA  |     VALOR            |"
+							Escribir "+-----------------------------------+"
+							Escribir "| Turista    |  $",BoleTurista
+							Escribir "| Plus       |  $",BolePlus
+							Escribir "| Full       |  $",BoleFull
+							Escribir "+-----------------------------------+"
+							Escribir " Precione una tecla para continuar"
+							Esperar Tecla
+						FinSi
+					FinSi
+					Si Op = 2 Entonces
+						Limpiar Pantalla
+						Escribir "____________________________________"
+						Escribir "      LISTAR PASAJES VENDIDOS"
+						Escribir "____________________________________"
+						Escribir " Se han vendido un total de pasajes "
+						Escribir "____________________________________"
+						Escribir " De la clase Turista:      ",TotalTurista
+						Escribir "____________________________________"
+						Escribir " De la clase Plus:         ",TotalPlus
+						Escribir "____________________________________"
+						Escribir " De la clase Full:         ",TotalFull
+						Escribir "____________________________________"
+						Escribir " Ocupados X menores:       ",Menores
+						Escribir "____________________________________"
+						Escribir " Ocupados X mayores        ",Mayores
+						Escribir "____________________________________"
+						Escribir " Lugares libres            ",Lugares
+						Escribir "____________________________________"
+						Escribir " Se vendieron un Total de: ",TotalTurista+TotalPlus+TotalFull
+						Escribir "____________________________________"
+						Escribir " La recaudacion es de:    $",Ganancias
+						Escribir "____________________________________"
+						// falta poner recaudacion si el micro va lleno y si son menores de 3 años no paga y no ocupa lugar
+						Escribir " Precione una Tecla para continuar"
+						Esperar Tecla
+					Finsi
+					Si Op = 3 Entonces
+						Limpiar Pantalla
+						Escribir "_____________________________________"
+						Escribir "     CAMBIAR CONTRASEÑA"
+						Escribir "_____________________________________"
+						Escribir " Ingrese la contraseña ACTUAL"
+						Leer Pass 
+						SI Pass = PassADM Entonces
+							Escribir " Ingrese la nueva contraseña"
+							leer PassADM
+							Escribir "Contraseña cambiada exitisamente, Precione una tecla."
+							Esperar Tecla
+						SiNo
+							Escribir " CONTRASEÑA INCORRECTA"
+						FinSi
+					FinSi
+					Si Op >= 4 Entonces
+						Escribir "ERROR!! OPCION NO VALIDA"
+						Esperar Tecla
+					FinSi
+				Hasta Que Op = 0 
+				Op = 1
+			SiNo
+				Escribir "La contraseña ingresada es incorrecta"
+				Escribir "Presione una tecla "
+				Esperar Tecla
+			FinSi
+		FinSi
+		Si Op >= 3 Entonces
+			Escribir "ERROR!! OPCION NO VALIDA"
+			Esperar Tecla
 		FinSi
 	Hasta Que Op = 0
 FinAlgoritmo
